@@ -40,33 +40,56 @@ Food delivery process complete.
 
 */
 
+// Task functions with delays
 const placeOrder = () => {
-    return new Promise((resolve) => {
-          // write logic here
-    });
-  };
-  
-  const prepareFood = () => {
-    return new Promise((resolve) => {
-          // write logic here
-    });
-  };
-  
-  const deliverFood = () => {
-    return new Promise((resolve, reject) => {
-          // write logic here
-    });
-  };
-  
-  const packageFood = () => {
-    return new Promise((resolve) => {
-          
-    });
-  };
-  
-  const startFoodDeliveryProcess = async () => {
-      // implement this function to call the above functions in a correct order.
-  };
-  
-  startFoodDeliveryProcess();
-  
+  return new Promise((resolve) => {
+      setTimeout(() => {
+          console.log("Order placed.");
+          resolve();
+      }, 1000);
+  });
+};
+
+const prepareFood = () => {
+  return new Promise((resolve) => {
+      setTimeout(() => {
+          console.log("Food prepared.");
+          resolve();
+      }, 3000);
+  });
+};
+
+const deliverFood = () => {
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+          console.log("Food delivered.");
+          resolve();
+      }, 2000);
+  });
+};
+
+const packageFood = () => {
+  return new Promise((resolve) => {
+      setTimeout(() => {
+          console.log("Food packaged.");
+          resolve();
+      }, 1000);
+  });
+};
+
+// Main function to control the process
+const startFoodDeliveryProcess = async () => {
+  try {
+      await placeOrder();
+      await prepareFood();
+
+      // Concurrent tasks: packageFood and deliverFood
+      await Promise.all([packageFood(), deliverFood()]);
+
+      console.log("Food delivery process complete.");
+  } catch (error) {
+      console.log("Error in food delivery process:", error);
+  }
+};
+
+startFoodDeliveryProcess();

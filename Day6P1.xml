@@ -15,3 +15,4 @@ Use the http module for server creation and fs module to read the HTML file.
 <config>
     <url value=""></url>
 </config>
+<!-- refer to the Day6P1 Application folder above -->

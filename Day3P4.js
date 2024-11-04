@@ -43,7 +43,6 @@ Each step is performed with the appropriate delay as specified.
 
 */
 
-
 const readline = require('readline');
 
 let stocks = {
@@ -58,6 +57,16 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+
+// Function to create a delay
+const delay = (time, message) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log(message);
+      resolve();
+    }, time);
+  });
+};
 
 // Ask for fruit selection
 const askFruit = () => {
@@ -80,11 +89,19 @@ const askTopping = (fruit, holder) => {
   });
 };
 
-// Ice cream production process
+// Ice cream production process with Promises
 const production = (fruit_name, holder_name, topping_name) => {
-    // Implement your logic here.
+  console.log(`${fruit_name} was selected`);
+  console.log("Production has started");
+
+  delay(1000, `The ${fruit_name} fruit has been chopped`)
+    .then(() => delay(1000, "Water and ice added"))
+    .then(() => delay(2000, "Start the machine"))
+    .then(() => delay(2000, `Ice cream placed in ${holder_name}`))
+    .then(() => delay(3000, `${topping_name} as toppings`))
+    .then(() => delay(2000, "Serve ice cream"))
+    .then(() => rl.close());
 };
 
 // Start the process
 askFruit();
-
